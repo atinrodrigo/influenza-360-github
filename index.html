@@ -1,0 +1,669 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INFLUENZA 360° | Tahun 4</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #101827;
+  color: white;
+}
+
+header {
+  padding: 24px;
+  text-align: center;
+  background: linear-gradient(135deg, #263d60, #101827);
+}
+
+header h1 {
+  margin: 0;
+  color: #ff9eb5;
+  font-size: clamp(28px, 5vw, 44px);
+}
+
+header p {
+  color: #c8d8ec;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 18px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 18px;
+}
+
+.card {
+  background: #1b2a40;
+  border: 1px solid #344b68;
+  border-radius: 20px;
+  padding: 18px;
+  min-width: 0;
+}
+
+#scene {
+  width: 100%;
+  height: 400px;
+  display: block;
+  border-radius: 16px;
+  background: #14243a;
+  touch-action: none;
+}
+
+button {
+  padding: 11px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: #304968;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 4px;
+}
+
+button:hover {
+  background: #42648b;
+}
+
+button.active {
+  background: #ff9eb5;
+  color: #281321;
+  font-weight: bold;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.info-title {
+  color: #ffb4c6;
+  font-size: 23px;
+}
+
+.info-text {
+  color: #d6e3f2;
+  line-height: 1.7;
+}
+
+.part-button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 8px 0;
+}
+
+.tip {
+  background: #263c56;
+  border-radius: 14px;
+  padding: 14px;
+  line-height: 1.6;
+  color: #dcecff;
+}
+
+.quiz {
+  margin-top: 18px;
+}
+
+#feedback {
+  min-height: 24px;
+  color: #ffe18b;
+  line-height: 1.5;
+}
+
+footer {
+  text-align: center;
+  color: #9db1c9;
+  font-size: 12px;
+  padding: 22px;
+  line-height: 1.6;
+}
+
+@media(max-width: 760px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  #scene {
+    height: 340px;
+  }
+}
+
+[hidden]{display:none!important} .missions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.missions button{text-align:left;padding:20px;border:1px solid #456083;border-radius:18px;background:#1b2d47;color:white;font-size:17px}.missions button[aria-selected=true]{background:#304d70;border-color:#7de2d1}.missions small{display:block;margin:8px 0;color:#b8d0e9}.story{border-left:4px solid #7de2d1;padding:20px;background:#192b40;border-radius:12px;margin:20px 0;line-height:1.7}.lesson{animation:appear .3s ease} @keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}button{cursor:pointer;min-height:44px}button:focus-visible{outline:3px solid #ffdb83;outline-offset:3px}.check{padding:20px;background:#24344d;border-radius:16px;margin:20px 0}.result{min-height:28px;color:#a5eee0}.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}.compare article{padding:20px;border:1px solid #526582;border-radius:16px;background:#172a40}.compare h3{font-size:24px}.fact{font-size:22px;padding:24px;text-align:center;background:#31465f;border-radius:15px}.spread-svg{width:100%;max-height:350px;background:#162d43;border-radius:18px}.range{width:100%;accent-color:#7de2d1}#badge{padding:24px;background:#285649;border-radius:16px;text-align:center;font-size:24px}a{color:#8adbd3} .progress{color:#7de2d1;font-weight:bold}@media(max-width:650px){.missions,.compare{grid-template-columns:1fr}.missions button{padding:12px}.missions small{margin:4px 0}}
+details summary{cursor:pointer;font-weight:bold;padding:12px 0;color:#a5eee0} details p{line-height:1.7} .reason{border-top:1px solid #53647b;margin-top:20px;padding-top:12px} .story h2{color:#a5eee0} </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🦠 INFLUENZA 360°</h1>
+  <p>Makmal Sains Maya • Tahun 4</p>
+  <p>Tiga misteri. Satu detektif sains. Jom mulakan penyiasatan!</p>
+</header>
+
+<main class="container">
+<p class="progress" id="progress" aria-live="polite">0 / 3 misi selesai</p>
+<nav class="missions" aria-label="Pilih misi">
+<button data-mission="1" aria-selected="true">01 · Kenali influenza<small>Apakah influenza?</small><span id="mark1">Mulakan penyiasatan →</span></button>
+<button data-mission="2" aria-selected="false">02 · Jejak titisan<small>Bagaimanakah virus merebak?</small><span id="mark2">Ikut perjalanan →</span></button>
+<button data-mission="3" aria-selected="false">03 · Virus atau bakteria?<small>Apakah perbezaannya?</small><span id="mark3">Uji kemahiran →</span></button>
+</nav>
+<section id="mission1" class="lesson">
+<div class="story"><strong>Misteri 1 · Mengapa Amir tidak hadir?</strong><p>Amir demam, batuk dan letih. Doktor mengatakan Amir menghidap influenza.</p><h2>Influenza disebabkan oleh virus.</h2><p>Ia ialah penyakit berjangkit yang menyerang bahagian tubuh yang membantu kita bernafas.</p><details><summary>Nak tahu lebih lanjut?</summary><p>Bahagian itu termasuk hidung, tekak dan paru-paru. Demam atau batuk sahaja tidak bermakna seseorang pasti menghidap influenza.</p></details></div>
+<details id="extraModel" class="story"><summary>🔬 Aktiviti tambahan · Teroka model virus 3D</summary><p>Tidak perlu menghafal nama bahagian. Putar model dan lihat perbezaan bahagian luar dengan bahagian dalam.</p>
+  <div class="layout">
+
+    <section class="card">
+      <h2>🔬 Model Virus 3D</h2>
+      <p>Seret model untuk melihat virus dari pelbagai sudut.</p>
+
+      <canvas id="scene"></canvas>
+
+      <div class="controls">
+        <button id="outerBtn" class="active">
+          🌐 Struktur luar
+        </button>
+
+        <button id="insideBtn">
+          🧬 Bahagian dalam
+        </button>
+
+        <button id="resetBtn">
+          ↻ Tetapkan semula
+        </button>
+      </div>
+
+      <p class="info-text">
+        💡 Gunakan tetikus atau jari untuk memutar model.
+        Gunakan roda tetikus atau cubit skrin untuk zum.
+      </p>
+    </section>
+
+    <aside class="card">
+      <h2>🔎 Teroka Struktur</h2>
+
+      <h3 class="info-title" id="partName">
+        Protein permukaan
+      </h3>
+
+      <p class="info-text" id="partDescription">
+        Protein permukaan ialah tonjolan kecil pada virus
+        yang membantu virus melekat pada sel perumah.
+      </p>
+
+      <div class="tip" id="partTip">
+        Cuba cari struktur seperti duri kecil pada permukaan virus!
+      </div>
+
+      <h3>Pilih bahagian:</h3>
+
+      <button class="part-button active"
+        data-part="spike">
+        🌸 Protein permukaan
+      </button>
+
+      <button class="part-button"
+        data-part="envelope">
+        🩵 Sampul virus
+      </button>
+
+      <button class="part-button"
+        data-part="rna">
+        💛 Maklumat genetik (RNA)
+      </button>
+    </aside>
+
+  </div>
+
+  <section class="card quiz">
+    <h2>🎯 Kuiz Mini</h2>
+
+    <p>
+      Bahagian manakah membawa maklumat genetik virus?
+    </p>
+
+    <button data-answer="spike">
+      Protein permukaan
+    </button>
+
+    <button data-answer="envelope">
+      Sampul virus
+    </button>
+
+    <button data-answer="rna">
+      Maklumat genetik (RNA)
+    </button>
+
+    <p id="feedback" aria-live="polite"></p>
+  </section>
+
+</details>
+<div class="check"><h3>Semak penemuan kamu</h3><p>Apakah penyebab influenza?</p><button data-check="1" data-ok="yes">Virus influenza</button><button data-check="1">Semua bakteria</button><p id="result1" class="result" aria-live="polite"></p><button data-go="2">Teruskan ke misi 2 →</button></div>
+</section>
+<section id="mission2" class="lesson" hidden>
+<div class="story"><strong>Misteri 2 · Bagaimana ia berpindah?</strong><p>Orang yang dijangkiti boleh mengeluarkan titisan yang membawa virus ketika bercakap, batuk atau bersin. Sebahagiannya boleh masuk ke hidung atau mulut orang lain.</p><p>Tekan <strong>Main</strong> atau gerakkan peluncur. Perhatikan titisan besar yang jatuh dan partikel halus yang bergerak di udara.</p></div>
+<svg class="spread-svg" viewBox="0 0 800 300" role="img" aria-label="Ilustrasi partikel bergerak antara dua orang">
+<path d="M0 265H800" stroke="#7894ab"/><g fill="#7dd3fc"><circle cx="110" cy="110" r="40"/><rect x="75" y="150" width="70" height="110" rx="28"/><path d="M145 105l20 12-20 8"/></g><g fill="#fda4af"><circle cx="690" cy="110" r="40"/><rect x="655" y="150" width="70" height="110" rx="28"/><path d="M655 105l-20 12 20 8"/></g><g id="drops"></g><text x="65" y="290" fill="white" font-size="16">Orang A</text><text x="650" y="290" fill="white" font-size="16">Orang B</text></svg>
+<p style="color:#b9cde2">Ilustrasi diperbesar, bukan skala sebenar. Biru: titisan lebih besar. Kuning: partikel lebih halus. Pendedahan tidak semestinya menyebabkan jangkitan.</p>
+<button id="spreadPlay">▶ Main perlahan</button><button id="spreadReset">↻ Ulang</button><label for="spreadTime"> Perjalanan titisan</label><input class="range" id="spreadTime" type="range" min="0" max="100" value="0"><p id="spreadCaption" aria-live="polite">Titisan bermula berhampiran mulut Orang A.</p>
+<div class="check"><h3>Apa tindakan yang membantu?</h3><button data-check="2" data-ok="yes">Tutup bersin dengan siku atau tisu</button><button data-check="2">Bersin ke arah kawan</button><p id="result2" class="result" aria-live="polite"></p><p>Basuh tangan dan alirkan udara segar ke dalam bilik.<details><summary>Ada cara lain virus berpindah?</summary><p>Tangan boleh menyentuh permukaan yang mempunyai virus, kemudian menyentuh hidung, mulut atau mata.</p></details></p><div class="reason"><h3>Cuba fikir: mengapa tutup bersin?</h3><p>Pilih sebab yang paling tepat.</p><button data-reason="yes">Mengurangkan titisan yang tersebar ke sekeliling</button><button data-reason="no">Membunuh semua virus serta-merta</button><p id="reasonFeedback" class="result" aria-live="polite"></p><details><summary>Bincang dengan rakan</summary><p>Jika tiada tisu, apakah yang boleh kamu gunakan? Tunjukkan caranya dan jelaskan sebabnya kepada rakan.</p></details></div><button data-go="3">Teruskan ke misi 3 →</button></div>
+</section>
+<section id="mission3" class="lesson" hidden>
+<div class="story"><strong>Misteri 3 · Sama kecil, tetapi berbeza!</strong><p>Virus dan bakteria bukan benda yang sama. Perhatikan petunjuk, kemudian kelaskan kad di bawah.</p></div>
+<div class="compare"><article><h3>✳ Virus</h3><p>Virus bukan sel. Ia perlu masuk ke dalam sel hidup untuk menghasilkan virus baharu.</p><p>Contoh: virus influenza. <details><summary>Apakah sel perumah?</summary><p>Sel perumah ialah sel hidup yang digunakan oleh virus untuk membiak. Sel ialah unit kecil yang membentuk benda hidup.</p></details></p></article><article><h3>〰 Bakteria</h3><p>Bakteria ialah benda hidup yang terdiri daripada satu sel. Banyak bakteria boleh membiak sendiri apabila keadaan sesuai.</p><p>Ada bakteria yang membantu tubuh kita. Bukan semuanya menyebabkan penyakit.<details><summary>Bagaimana pula dengan antibiotik?</summary><p>Antibiotik digunakan untuk jangkitan bakteria tertentu mengikut nasihat profesional kesihatan. Antibiotik tidak merawat influenza yang disebabkan oleh virus.</p></details></p></article></div>
+<div class="check"><p id="sortCount">Kad 1 / 4</p><p id="sortFact" class="fact"></p><p>Pilih kumpulan yang sepadan:</p><button data-sort="virus">✳ Virus</button><button data-sort="bacteria">〰 Bakteria</button><p id="sortFeedback" class="result" aria-live="polite"></p><button id="sortNext" hidden>Kad seterusnya →</button><button id="sortRestart">↻ Cuba semula</button></div>
+</section>
+<div id="badge" hidden>⭐ Detektif Mikroorganisma!<p>Kamu sudah menyelesaikan ketiga-tiga misi.</p><button id="restartMissions">Ulang semua misi</button></div>
+<details class="story"><summary>Untuk guru · Sumber pembelajaran</summary><p>Sasaran: Tahun 4. Fokus: penyebab influenza, cara penyebaran dan perbezaan virus dengan bakteria. Model terperinci ialah pengayaan pilihan. Aktiviti ini belum dipadankan dengan standard DSKP tertentu dan bukan alat diagnosis.</p><a href="https://www.cdc.gov/flu/about/index.html" target="_blank" rel="noopener">CDC: Mengenali influenza</a> · <a href="https://www.cdc.gov/flu/spread/index.html" target="_blank" rel="noopener">CDC: Penyebaran influenza</a> · <a href="https://www.cdc.gov/antibiotic-use/about/" target="_blank" rel="noopener">CDC: Antibiotik</a></details>
+
+</main>
+
+<footer>
+  Model 3D ini ialah ilustrasi pendidikan dan bukan gambaran
+  struktur virus pada skala sebenar.
+</footer>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}
+</script>
+<script type="module">
+import * as THREE from
+'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+import { OrbitControls } from
+'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+
+// 1. Sediakan ruang 3D
+
+const canvas = document.getElementById("scene");
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color("#14243a");
+
+const camera = new THREE.PerspectiveCamera(
+  45, 1, 0.1, 100
+);
+
+camera.position.set(0, 0, 6);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: true
+});
+
+renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio || 1, 2)
+);
+
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+// 2. Pencahayaan
+
+scene.add(new THREE.HemisphereLight(
+  0xffffff, 0x35405c, 2.5
+));
+
+const light = new THREE.DirectionalLight(
+  0xffffff, 3
+);
+
+light.position.set(4, 5, 6);
+scene.add(light);
+
+// 3. Kumpulan model virus
+
+const virus = new THREE.Group();
+scene.add(virus);
+
+// Sampul virus
+
+const envelopeMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0x70d9ed,
+    roughness: 0.3,
+    metalness: 0.05,
+    transparent: true,
+    opacity: 0.78
+  });
+
+const envelope = new THREE.Mesh(
+  new THREE.SphereGeometry(1.3, 48, 36),
+  envelopeMaterial
+);
+
+envelope.userData.part = "envelope";
+virus.add(envelope);
+
+// Protein permukaan
+
+const spikeGroup = new THREE.Group();
+virus.add(spikeGroup);
+
+const spikeMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0xff8eae,
+    roughness: 0.3
+  });
+
+const spikeHeadMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0xffc0d0,
+    roughness: 0.25
+  });
+
+const spikeCount = 140;
+
+for (let i = 0; i < spikeCount; i++) {
+
+  const y = 1 - 2 * (i + 0.5) / spikeCount;
+  const radius = Math.sqrt(1 - y * y);
+  const angle = i * Math.PI * (3 - Math.sqrt(5));
+
+  const direction = new THREE.Vector3(
+    Math.cos(angle) * radius,
+    y,
+    Math.sin(angle) * radius
+  ).normalize();
+
+  const start = direction.clone().multiplyScalar(1.24);
+  const end = direction.clone().multiplyScalar(1.53);
+  const middle = start.clone().add(end).multiplyScalar(0.5);
+
+  const stem = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.025, 0.045, 0.3, 8),
+    spikeMaterial
+  );
+
+  stem.position.copy(middle);
+  stem.quaternion.setFromUnitVectors(
+    new THREE.Vector3(0, 1, 0),
+    direction
+  );
+
+  stem.userData.part = "spike";
+  spikeGroup.add(stem);
+
+  const head = new THREE.Mesh(
+    new THREE.SphereGeometry(0.065, 10, 8),
+    spikeHeadMaterial
+  );
+
+  head.position.copy(end);
+  head.userData.part = "spike";
+  spikeGroup.add(head);
+}
+
+// 4. Kandungan dalaman virus
+
+const insideGroup = new THREE.Group();
+virus.add(insideGroup);
+
+const core = new THREE.Mesh(
+  new THREE.SphereGeometry(0.85, 32, 24),
+  new THREE.MeshStandardMaterial({
+    color: 0x53678a,
+    transparent: true,
+    opacity: 0.85
+  })
+);
+
+core.userData.part = "rna";
+insideGroup.add(core);
+
+// Jalur RNA berbentuk lingkaran
+
+const rnaMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0xffd76b,
+    emissive: 0x6c4b12,
+    emissiveIntensity: 0.4
+  });
+
+for (let strand = 0; strand < 8; strand++) {
+
+  const points = [];
+
+  for (let j = 0; j <= 80; j++) {
+    const t = j / 80;
+    const angle = t * Math.PI * 5 + strand * 0.8;
+    const radius = 0.15 + t * 0.48;
+
+    points.push(new THREE.Vector3(
+      Math.cos(angle) * radius,
+      (t - 0.5) * 1.4,
+      Math.sin(angle) * radius
+    ));
+  }
+
+  const curve = new THREE.CatmullRomCurve3(points);
+
+  const rna = new THREE.Mesh(
+    new THREE.TubeGeometry(curve, 100, 0.025, 7, false),
+    rnaMaterial
+  );
+
+  rna.userData.part = "rna";
+  insideGroup.add(rna);
+}
+
+insideGroup.visible = false;
+
+// 5. Kawalan putaran dan zum
+
+const controls = new OrbitControls(camera, renderer.domElement);
+
+controls.enableDamping = true;
+controls.dampingFactor = 0.07;
+controls.minDistance = 3.2;
+controls.maxDistance = 9;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.6;
+
+// Saiz responsif
+
+function resizeScene() {
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  if (!width || !height) return;
+
+  renderer.setSize(width, height, false);
+
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+}
+
+new ResizeObserver(resizeScene).observe(canvas);
+resizeScene();
+
+// 6. Maklumat struktur virus
+
+const information = {
+  spike: {
+    name: "Protein permukaan",
+    description:
+      "Protein permukaan ialah tonjolan pada virus yang membantu virus melekat pada sel perumah.",
+    tip:
+      "🌸 Cari tonjolan kecil seperti duri di sekeliling virus."
+  },
+
+  envelope: {
+    name: "Sampul virus",
+    description:
+      "Sampul virus ialah lapisan luar yang menyelaputi virus influenza.",
+    tip:
+      "🩵 Perhatikan lapisan yang mengelilingi bahagian dalam virus."
+  },
+
+  rna: {
+    name: "Maklumat genetik (RNA)",
+    description:
+      "RNA membawa maklumat genetik yang diperlukan virus untuk menghasilkan virus baharu di dalam sel perumah.",
+    tip:
+      "💛 Dalam model ini, RNA ditunjukkan sebagai jalur kuning."
+  }
+};
+
+function selectPart(part) {
+
+  const data = information[part];
+
+  document.getElementById("partName").textContent =
+    data.name;
+
+  document.getElementById("partDescription").textContent =
+    data.description;
+
+  document.getElementById("partTip").textContent =
+    data.tip;
+
+  document.querySelectorAll(".part-button").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.part === part
+    );
+  });
+}
+
+document.querySelectorAll(".part-button").forEach(button => {
+  button.addEventListener("click", () => {
+    selectPart(button.dataset.part);
+  });
+});
+
+// 7. Tukar paparan luar dan dalam
+
+document.getElementById("outerBtn").addEventListener("click", () => {
+
+  envelope.visible = true;
+  envelope.material.opacity = 0.78;
+  spikeGroup.visible = true;
+  insideGroup.visible = false;
+
+  document.getElementById("outerBtn").classList.add("active");
+  document.getElementById("insideBtn").classList.remove("active");
+
+  selectPart("spike");
+});
+
+document.getElementById("insideBtn").addEventListener("click", () => {
+
+  envelope.visible = true;
+  envelope.material.opacity = 0.18;
+  spikeGroup.visible = false;
+  insideGroup.visible = true;
+
+  document.getElementById("insideBtn").classList.add("active");
+  document.getElementById("outerBtn").classList.remove("active");
+
+  selectPart("rna");
+});
+
+// 8. Tetapkan semula model
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+
+  camera.position.set(0, 0, 6);
+  controls.target.set(0, 0, 0);
+  controls.reset();
+
+  envelope.visible = true;
+  envelope.material.opacity = 0.78;
+  spikeGroup.visible = true;
+  insideGroup.visible = false;
+
+  controls.autoRotate = true;
+
+  document.getElementById("outerBtn").classList.add("active");
+  document.getElementById("insideBtn").classList.remove("active");
+
+  selectPart("spike");
+});
+
+// 9. Pilih bahagian dengan klik dua kali pada model
+
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+
+canvas.addEventListener("dblclick", event => {
+
+  const rect = canvas.getBoundingClientRect();
+
+  pointer.x =
+    ((event.clientX - rect.left) / rect.width) * 2 - 1;
+
+  pointer.y =
+    -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+  raycaster.setFromCamera(pointer, camera);
+
+  const hits = raycaster.intersectObjects(
+    virus.children, true
+  );
+
+  if (hits.length > 0) {
+
+    const object = hits.find(
+      hit => hit.object.userData.part
+    );
+
+    if (object) {
+      selectPart(object.object.userData.part);
+    }
+  }
+});
+
+// 10. Kuiz mini
+
+document.querySelectorAll("[data-answer]").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const feedback = document.getElementById("feedback");
+
+    if (button.dataset.answer === "rna") {
+
+      feedback.textContent =
+        "Betul! 🎉 RNA membawa maklumat genetik virus.";
+
+      feedback.style.color = "#9ff2c0";
+
+    } else {
+
+      feedback.textContent =
+        "Cuba lagi! 💡 Petunjuk: bahan genetik berada di bahagian dalam virus.";
+
+      feedback.style.color = "#ffd878";
+    }
+  });
+});
+
+// 11. Animasi 3D
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+animate();
+
+</script>
+
+<script src="missions.js"></script>
+</body>
+</html>
